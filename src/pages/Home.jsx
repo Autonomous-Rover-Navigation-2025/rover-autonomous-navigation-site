@@ -113,10 +113,9 @@ const ThumbImg = styled.img`
   /* Important: don't force width/height to 100% */
   max-width: 100%;
   max-height: 100%;
-  width: auto !important; /* override any global img { width:100% } */
-  height: auto;
-
-  object-fit: contain; /* optional with max-*, harmless */
+  width: auto !important;
+  height: auto !important;
+  object-fit: contain !important;
   object-position: center;
   display: block;
 `;
