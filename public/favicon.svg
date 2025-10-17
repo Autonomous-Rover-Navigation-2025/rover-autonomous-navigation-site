@@ -1,0 +1,45 @@
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#111827" />
+      <stop offset="100%" stop-color="#334155" />
+    </linearGradient>
+    <linearGradient id="g2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#A7F3D0"/>
+      <stop offset="100%" stop-color="#60A5FA"/>
+    </linearGradient>
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000000" flood-opacity="0.25" />
+    </filter>
+  </defs>
+
+  <!-- Base rounded square -->
+  <rect x="16" y="28" width="224" height="192" rx="28" fill="url(#g1)" />
+
+  <!-- Wheels (mecanum-ish hints) -->
+  <g opacity="0.9">
+    <circle cx="54" cy="202" r="18" fill="#0EA5E9"/>
+    <circle cx="202" cy="202" r="18" fill="#22D3EE"/>
+  </g>
+
+  <!-- Lidar puck -->
+  <g filter="url(#shadow)">
+    <ellipse cx="128" cy="68" rx="46" ry="18" fill="#E5E7EB"/>
+    <rect x="90" y="54" width="76" height="24" rx="12" fill="#E5E7EB" />
+  </g>
+
+  <!-- Camera bar -->
+  <g filter="url(#shadow)">
+    <rect x="68" y="92" width="120" height="28" rx="14" fill="#F8FAFC" />
+    <rect x="78" y="96" width="100" height="20" rx="10" fill="#0F172A" />
+    <circle cx="98" cy="106" r="4" fill="#93C5FD"/>
+    <circle cx="128" cy="106" r="4" fill="#93C5FD"/>
+    <circle cx="158" cy="106" r="4" fill="#93C5FD"/>
+  </g>
+
+  <!-- Platform top ring -->
+  <circle cx="128" cy="138" r="44" stroke="url(#g2)" stroke-width="6" fill="none"/>
+
+  <!-- Subtle spark line -->
+  <path d="M50 170 C 90 150, 166 150, 206 170" stroke="url(#g2)" stroke-width="4" opacity="0.6" fill="none"/>
+</svg>
