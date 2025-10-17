@@ -27,9 +27,10 @@ const Summary = styled.p`
 `;
 
 // ✅ Load markdown as RAW text, not as a module
-const mdModules = import.meta.glob("../content/posts/*.md", {
+const mdModules = import.meta.glob("../content/docs/*.md", {
+  query: "?raw",
+  import: "default",
   eager: true,
-  as: "raw",
 });
 
 function parseFrontMatter(raw) {
@@ -68,7 +69,7 @@ const posts = Object.entries(mdModules)
 
 export default function Documents() {
   return (
-    <section>
+    <section style={{ paddingTop: "40px" }}>
       <h1 style={{ fontSize: 24, margin: "0 0 12px" }}>Documents</h1>
       <ListWrap>
         {posts.map(p => (
