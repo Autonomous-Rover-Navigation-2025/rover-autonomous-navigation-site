@@ -222,6 +222,22 @@ export default function Home() {
 
           <CardPretty>
             <Thumb>
+              <ThumbImg src="/hardware/sabertooth.jpeg" alt="IMU" />
+            </Thumb>
+            <CardKicker>Control</CardKicker>
+            <CardTitle>Sabertooth</CardTitle>
+            <CardBodySm>
+              Dual-channel DC motor driver (12A continuous, 25A peak) for quick
+              acceleration and reliable braking.
+            </CardBodySm>
+            <Pills>
+              <Pill>UART</Pill>
+              <Pill>Dual 12A motors</Pill>
+            </Pills>
+          </CardPretty>
+
+          <CardPretty>
+            <Thumb>
               <ThumbImg src="/hardware/imu.jpg" alt="IMU" />
             </Thumb>
             <CardKicker>State Estimation</CardKicker>
@@ -238,10 +254,10 @@ export default function Home() {
 
           <CardPretty>
             <Thumb>
-              {/* <ThumbImg src="/hardware/encoders.jpg" alt="Wheel Encoders" /> */}
-              <span style={{ fontSize: 12, color: "#94a3b8" }}>
-                Add image: /public/hardware/encoders.jpg
-              </span>
+              <ThumbImg
+                src="/hardware/wheel-encoder.jpeg"
+                alt="Wheel Encoders"
+              />
             </Thumb>
             <CardKicker>State Estimation</CardKicker>
             <CardTitle>Wheel Encoders</CardTitle>
