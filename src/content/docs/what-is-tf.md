@@ -1,7 +1,9 @@
 ---
 title: "What is TF?"
 date: "2025-04-24"
-summary: "Project setup, goals, and initial architecture notes."
+summary: "An introduction to TF (Transform Frames) in ROS2, explaining coordinate systems and frame transformations."
+writer: "Chaerin An"
+keywords: "ROS2, TF, Transforms, Frames"
 ---
 
 ### **What is a "Frame"?**
