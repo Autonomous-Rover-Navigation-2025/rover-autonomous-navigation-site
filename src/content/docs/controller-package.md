@@ -1,5 +1,5 @@
 ---
-title: "Controller Package Documentation"
+title: "Controller Custom Package"
 date: "2025-10-30"
 summary: "Comprehensive documentation for the ROS2 Controller Package including keyboard control, Sabertooth motor bridge, wheel encoder, and wheel odometry publisher nodes."
 writer: "Vaibhav Ashokbhai Gajera, Sahil Mukeshbhai Kakadiya"
@@ -36,13 +36,13 @@ These commands are then **published to the `/cmd_vel_nav` topic**, allowing the 
 
 **Key Bindings**
 
-| Key | Action | Linear Velocity (x) | Angular Velocity (z) |
-| --- | --- | --- | --- |
-| W | Move Forward | + | 0 |
-| S | Move Backward | - | 0 |
-| A | Turn Left | 0 | + |
-| D | Turn Right | 0 | - |
-| Q | Stop and Exit | 0 | 0 |
+| Key | Action        | Linear Velocity (x) | Angular Velocity (z) |
+| --- | ------------- | ------------------- | -------------------- |
+| W   | Move Forward  | +                   | 0                    |
+| S   | Move Backward | -                   | 0                    |
+| A   | Turn Left     | 0                   | +                    |
+| D   | Turn Right    | 0                   | -                    |
+| Q   | Stop and Exit | 0                   | 0                    |
 
 The node captures each keypress, converts it into a **Twist** message, and publishes it. The `Twist` message structure:
 
@@ -156,6 +156,7 @@ It interprets linear (`x`) and angular (`z`) velocities and converts them into *
    ```
 
 3. On receiving a `/cmd_vel_nav` message:
+
    - Extracts `linear.x` and `angular.z` values.
    - Calculates each wheel's speed:
 
@@ -165,6 +166,7 @@ It interprets linear (`x`) and angular (`z`) velocities and converts them into *
      ```
 
    - Normalizes these speeds to a range [-127, 127].
+
 4. Sends commands to Sabertooth using:
 
    ```python
@@ -177,19 +179,19 @@ It interprets linear (`x`) and angular (`z`) velocities and converts them into *
 
 ### **5. Motor Control Logic**
 
-| Motion Type | Condition | Motor Command |
-| --- | --- | --- |
-| Forward | linear.x > 0 | Both motors forward |
-| Backward | linear.x < 0 | Both motors reverse |
-| Turn Left | angular.z > 0 | Left motor reverse, right motor forward |
-| Turn Right | angular.z < 0 | Left motor forward, right motor reverse |
-| Stop | linear.x = 0 and angular.z = 0 | Send zero speed to both motors |
+| Motion Type | Condition                      | Motor Command                           |
+| ----------- | ------------------------------ | --------------------------------------- |
+| Forward     | linear.x > 0                   | Both motors forward                     |
+| Backward    | linear.x < 0                   | Both motors reverse                     |
+| Turn Left   | angular.z > 0                  | Left motor reverse, right motor forward |
+| Turn Right  | angular.z < 0                  | Left motor forward, right motor reverse |
+| Stop        | linear.x = 0 and angular.z = 0 | Send zero speed to both motors          |
 
 ---
 
 ### **6. Sabertooth Serial Packet Structure**
 
-> ⚠️ Note: The Sabertooth DIP switches should be configured for Simplified Serial Mode (refer to the Sabertooth 2*12V manual).
+> ⚠️ Note: The Sabertooth DIP switches should be configured for Simplified Serial Mode (refer to the Sabertooth 2\*12V manual).
 
 Each command sent to the Sabertooth motor driver follows this format:
 
@@ -214,9 +216,9 @@ addr=128, cmd=0, val=60 → checksum=60
 ### **7. Address and Command Mapping**
 
 | Motor | Address | Forward Cmd | Reverse Cmd |
-| --- | --- | --- | --- |
-| Left | 129 | 0 | 1 |
-| Right | 128 | 0 | 1 |
+| ----- | ------- | ----------- | ----------- |
+| Left  | 129     | 0           | 1           |
+| Right | 128     | 0           | 1           |
 
 **Optional Ramp Commands:**
 
@@ -285,23 +287,23 @@ It provides **low-level encoder ticks with direction feedback** necessary for fo
 
 ## ⚙️ Node Overview
 
-| Feature | Description |
-| --- | --- |
-| **Node name** | `wheel_encoder_node` |
-| **Purpose** | Generate the encoder raw data in terms of signed ticks |
-| **Frequency** | 50 Hz updates |
-| **ROS 2 Package Dependency** | `rclpy`, `Float32MultiArray`, `Jetson.GPIO`, `time` |
+| Feature                      | Description                                            |
+| ---------------------------- | ------------------------------------------------------ |
+| **Node name**                | `wheel_encoder_node`                                   |
+| **Purpose**                  | Generate the encoder raw data in terms of signed ticks |
+| **Frequency**                | 50 Hz updates                                          |
+| **ROS 2 Package Dependency** | `rclpy`, `Float32MultiArray`, `Jetson.GPIO`, `time`    |
 
 ## 🧾 Input / Output Specification
 
 ### 🟢 Input Actual Hardware GPIO PIN MAPPING
 
-| Wheel | A Pin | B Pin |
-| --- | --- | --- |
-| front_left | 19 | 36 |
-| front_right | 22 | 35 |
-| rear_left | 29 | 38 |
-| rear_right | 16 | 18 |
+| Wheel       | A Pin | B Pin |
+| ----------- | ----- | ----- |
+| front_left  | 19    | 36    |
+| front_right | 22    | 35    |
+| rear_left   | 29    | 38    |
+| rear_right  | 16    | 18    |
 
 ### 🔵 Output Topic
 
@@ -317,12 +319,12 @@ A **quadrature encoder** is a sensor that outputs two digital square waves : **C
 
 By monitoring the transitions of these signals, both the **direction** and **amount of rotation** can be determined.
 
-| Encoder State | A | B | Binary | Meaning |
-| --- | --- | --- | --- | --- |
-| State 0 | 0 | 0 | `00` | Reference |
-| State 1 | 0 | 1 | `01` | +90° |
-| State 2 | 1 | 1 | `11` | +180° |
-| State 3 | 1 | 0 | `10` | +270° |
+| Encoder State | A   | B   | Binary | Meaning   |
+| ------------- | --- | --- | ------ | --------- |
+| State 0       | 0   | 0   | `00`   | Reference |
+| State 1       | 0   | 1   | `01`   | +90°      |
+| State 2       | 1   | 1   | `11`   | +180°     |
+| State 3       | 1   | 0   | `10`   | +270°     |
 
 When the encoder rotates **forward**, the states follow the sequence:
 
@@ -395,7 +397,6 @@ ros2 launch controller controller.launch.py
 ## 🧭 Overview
 
 > Node: wheel_odom_publisher
->
 
 Purpose: Convert raw encoder tick data into real-world position (`x`, `y`, `θ`) and velocity (`vx`, `vy`, `ωz`) estimates, and publish these as standard ROS 2 odometry messages. Provide the Data to EKF node for Odom data Fusion.
 
@@ -403,13 +404,14 @@ Purpose: Convert raw encoder tick data into real-world position (`x`, `y`, `θ`)
 
 ## ⚙️ Node Overview
 
-| Feature | Description |
-| --- | --- |
-| **Node name** | `wheel_odom_publisher` |
-| **Purpose** | Integrate encoder ticks into position and velocity estimates |
-| **Frequency** | Event-driven (whenever `/encoder_ticks` updates) |
+| Feature                      | Description                                                                |
+| ---------------------------- | -------------------------------------------------------------------------- |
+| **Node name**                | `wheel_odom_publisher`                                                     |
+| **Purpose**                  | Integrate encoder ticks into position and velocity estimates               |
+| **Frequency**                | Event-driven (whenever `/encoder_ticks` updates)                           |
 | **ROS 2 Package Dependency** | `rclpy`, `tf2_ros`, `nav_msgs`, `geometry_msgs`, `std_msgs`, `sensor_msgs` |
-| Key Constants | `TICKS_PER_ROTATION` → 620
+| Key Constants                | `TICKS_PER_ROTATION` → 620                                                 |
+
 `WHEEL_DIAMETER`→ 0.1524 m
 `CIRCUMFERENCE`→ π × D
 `HALF_WHEEL_BASE`→ 0.105 m
@@ -442,7 +444,7 @@ Purpose: Convert raw encoder tick data into real-world position (`x`, `y`, `θ`)
 /imu/data  (sensor_msgs/Imu)
 ```
 
-*(future extension — currently yaw comes from `imu_yaw` placeholder)*
+_(future extension — currently yaw comes from `imu_yaw` placeholder)_
 
 ---
 
@@ -494,4 +496,3 @@ ros2 run controller wheel_odom_publisher
 ```bash
 ros2 launch controller controller.launch.py
 ```
-
