@@ -157,10 +157,64 @@ const Pill = styled.span`
   border: 1px solid #e2e8f0;
 `;
 
+/* ---------- Demo Video Section ---------- */
+const VideoContainer = styled.div`
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+`;
+
+const VideoWrapper = styled.div`
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 12px rgba(2, 6, 23, 0.08);
+  background: #000;
+`;
+
+const VideoIframe = styled.iframe`
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+`;
+
+const VideoCaption = styled.p`
+  margin: 16px 0 0;
+  text-align: center;
+  font-size: 14px;
+  color: #64748b;
+  line-height: 1.6;
+`;
+
 export default function Home() {
   return (
     <Page>
       <HeroAnimated />
+
+      {/* DEMO VIDEO SECTION */}
+      <Section>
+        <SectionHeader>Demo Video</SectionHeader>
+        <VideoContainer>
+          <VideoWrapper>
+            <VideoIframe
+              src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
+              title="Rover Autonomous Navigation Demo"
+              allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            />
+          </VideoWrapper>
+          <VideoCaption>
+            Watch the rover navigate autonomously indoor and outdoor, both in
+            daytime and nighttime.
+          </VideoCaption>
+        </VideoContainer>
+      </Section>
+
+      <Divider />
 
       <Section>
         <SectionHeader>Hardware</SectionHeader>
