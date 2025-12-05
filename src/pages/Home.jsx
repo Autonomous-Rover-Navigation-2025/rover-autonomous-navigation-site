@@ -201,7 +201,7 @@ export default function Home() {
         <VideoContainer>
           <VideoWrapper>
             <VideoIframe
-              src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
+              src="https://www.youtube.com/embed/9r4AT93h5W8"
               title="Rover Autonomous Navigation Demo"
               allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
