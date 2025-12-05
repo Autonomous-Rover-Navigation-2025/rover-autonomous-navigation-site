@@ -44,6 +44,18 @@ const List = styled.ul`
   gap: 10px;
 `;
 
+const MembersList = styled.ul`
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 1fr;
+  @media (min-width: 720px) {
+    grid-template-columns: 1fr 1fr;
+  }
+`;
+
 const Item = styled.li`
   border: 1px solid #e2e8f0;
   border-radius: 12px;
@@ -51,6 +63,48 @@ const Item = styled.li`
   background: #fff;
   display: grid;
   gap: 6px;
+`;
+
+const MemberInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+`;
+
+const MemberName = styled.strong`
+  font-size: 15px;
+  color: #0f172a;
+`;
+
+const MemberRole = styled.span`
+  font-size: 13.5px;
+  color: #475569;
+`;
+
+const LinkedInLink = styled.a`
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
+  color: #0077b5;
+  text-decoration: none;
+  font-size: 13px;
+  transition: color 0.15s ease;
+  &:hover {
+    color: #005885;
+  }
+  &:focus-visible {
+    outline: 2px solid #0077b5;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+`;
+
+const LinkedInIcon = styled.svg`
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+  flex-shrink: 0;
 `;
 
 const Meta = styled.span`
@@ -422,58 +476,126 @@ export default function Home() {
 
       {/* NEWS + PUBLICATIONS */}
       <Section>
-        <TwoCol>
-          {/* NEWS */}
-          <div>
-            <SectionHeader>News</SectionHeader>
-            <List>
-              <Item>
-                <Meta>Oct 2025</Meta>
-                <div>
-                  Initial prototype completes autonomous corridor navigation
-                  demo.
-                </div>
-              </Item>
-              <Item>
-                <Meta>Oct 2025</Meta>
-                <div>
-                  Map generation validated on campus dataset; tuning EKF params
-                  for smoother yaw.
-                </div>
-              </Item>
-              <Item>
-                <Meta>Sep 2025</Meta>
-                <div>
-                  Project website launched (this page). Blog and docs publishing
-                  enabled.
-                </div>
-              </Item>
-            </List>
-          </div>
-
-          {/* PUBLICATIONS / DOCS PREVIEW */}
-          <div>
-            <SectionHeader>Docs & Posts</SectionHeader>
-            <List>
-              <Item>
-                <Meta>Blog</Meta>
-                <Linkish to="/blog/sample-post">
-                  Kickoff: Rover Autonomous Navigation
-                </Linkish>
-              </Item>
-              <Item>
-                <Meta>Doc</Meta>
-                <a
-                  href="/src/content/docs/README.md"
-                  download
-                  style={{ color: "#0f172a", textDecoration: "none" }}
+        {/* MEMBERS */}
+        <SectionHeader>Team Members</SectionHeader>
+        <MembersList>
+          <Item>
+            <MemberInfo>
+              <MemberName>Marco Levorato</MemberName>
+              <MemberRole>Professor / Project Advisor</MemberRole>
+              <LinkedInLink
+                href="https://www.linkedin.com/in/marco-levorato-424a967/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <LinkedInIcon
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
                 >
-                  Project Documents README
-                </a>
-              </Item>
-            </List>
-          </div>
-        </TwoCol>
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                </LinkedInIcon>
+                LinkedIn
+              </LinkedInLink>
+            </MemberInfo>
+          </Item>
+          <Item>
+            <MemberInfo>
+              <MemberName>Chaerin An</MemberName>
+              <MemberRole>Software and DevOps Engineer</MemberRole>
+              <LinkedInLink
+                href="https://www.linkedin.com/in/chaerin00/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <LinkedInIcon
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                </LinkedInIcon>
+                LinkedIn
+              </LinkedInLink>
+            </MemberInfo>
+          </Item>
+          <Item>
+            <MemberInfo>
+              <MemberName>Selina Shrestha</MemberName>
+              <MemberRole>Software and Machine Learning Engineer</MemberRole>
+              <LinkedInLink
+                href="https://www.linkedin.com/in/selinashrestha/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <LinkedInIcon
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                </LinkedInIcon>
+                LinkedIn
+              </LinkedInLink>
+            </MemberInfo>
+          </Item>
+          <Item>
+            <MemberInfo>
+              <MemberName>Farhin Salman Mansuri </MemberName>
+              <MemberRole>Hardware and Embedded Software Developer</MemberRole>
+              <LinkedInLink
+                href="https://www.linkedin.com/in/farhin01/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <LinkedInIcon
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                </LinkedInIcon>
+                LinkedIn
+              </LinkedInLink>
+            </MemberInfo>
+          </Item>
+          <Item>
+            <MemberInfo>
+              <MemberName>Sahil Mukeshbhai Kakadiya</MemberName>
+              <MemberRole>
+                IOT Communication and Embedded Software Developer
+              </MemberRole>
+              <LinkedInLink
+                href="https://www.linkedin.com/in/sahil-kakadiya/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <LinkedInIcon
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                </LinkedInIcon>
+                LinkedIn
+              </LinkedInLink>
+            </MemberInfo>
+          </Item>
+          <Item>
+            <MemberInfo>
+              <MemberName>Vaibhav Ashokbhai Gajera </MemberName>
+              <MemberRole>Embedded Software and Hardware Engineer </MemberRole>
+              <LinkedInLink
+                href="https://www.linkedin.com/in/vaibhavgajera23/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <LinkedInIcon
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                </LinkedInIcon>
+                LinkedIn
+              </LinkedInLink>
+            </MemberInfo>
+          </Item>
+        </MembersList>
       </Section>
     </Page>
   );
