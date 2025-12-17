@@ -4,6 +4,7 @@ date: "2025-10-09"
 summary: "Complete guide for running the rover demo including Lidar, Camera, Controllers, Mapping, and Navigation with troubleshooting tips."
 writer: "Chaerin An, Selina Shrestha"
 keywords: "ROS2, Demo, Mapping, Navigation, SLAM, Lidar"
+pinned: true
 ---
 
 ## Start docker

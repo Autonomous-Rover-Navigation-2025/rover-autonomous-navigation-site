@@ -4,6 +4,7 @@ date: "2025-10-26"
 summary: "Complete system architecture overview of the Rover Autonomous Navigation system, integrating hardware sensors, ROS 2 perception, navigation, control, and speech command processing."
 writer: "Chaerin An"
 keywords: "System Architecture, ROS2, Navigation, Perception, Hardware Integration"
+pinned: true
 ---
 
 ## 🧭 Rover Autonomous Navigation – System Overview

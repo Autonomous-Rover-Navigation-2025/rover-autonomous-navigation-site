@@ -501,7 +501,7 @@ export default function Home() {
           <Item>
             <MemberInfo>
               <MemberName>Chaerin An</MemberName>
-              <MemberRole>Software and DevOps Engineer</MemberRole>
+              <MemberRole>Embedded Software Engineer</MemberRole>
               <LinkedInLink
                 href="https://www.linkedin.com/in/chaerin00/"
                 target="_blank"

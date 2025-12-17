@@ -39,10 +39,19 @@ const Title = styled.div`
   line-height: 1.3;
   letter-spacing: -0.01em;
   transition: color 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 
   ${Item}:hover & {
     color: #2563eb;
   }
+`;
+
+const PinIcon = styled.img`
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
 `;
 
 const MetaRow = styled.div`
@@ -128,10 +137,15 @@ const posts = Object.entries(mdModules)
       date: data.date || "Unknown date",
       summary: data.summary || "",
       writer: data.writer || "",
+      pinned: `${data.pinned || ""}`.toLowerCase() === "true",
       keywords,
     };
   })
-  .sort((a, b) => new Date(b.date) - new Date(a.date));
+  .sort((a, b) => {
+    if (a.pinned && !b.pinned) return -1;
+    if (!a.pinned && b.pinned) return 1;
+    return new Date(b.date) - new Date(a.date);
+  });
 
 const PageHeader = styled.header`
   margin-bottom: 32px;
@@ -165,7 +179,12 @@ export default function Documents() {
         {posts.map(p => (
           <Item key={p.slug}>
             <Link to={`/documents/${p.slug}`}>
-              <Title>{p.title}</Title>
+              <Title>
+                {p.pinned && (
+                  <PinIcon src="/pin.svg" alt="Pinned" aria-label="Pinned" />
+                )}
+                {p.title}
+              </Title>
               <MetaRow>
                 {p.date && <MetaBadge>📅 {p.date}</MetaBadge>}
                 {p.writer && <MetaBadge>✍️ {p.writer}</MetaBadge>}
